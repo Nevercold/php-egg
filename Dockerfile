@@ -6,6 +6,7 @@ RUN apt update
 RUN apt upgrade
 RUN apt install ca-certificates apt-transport-https lsb-release gnupg curl nano unzip -y
 RUN curl -fsSL https://packages.sury.org/php/apt.gpg -o /usr/share/keyrings/php-archive-keyring.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/php-archive-keyring.gpg] https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
 RUN apt update
 RUN apt install -y \
     nginx \
