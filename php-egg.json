@@ -1,9 +1,9 @@
 {
   "name": "PHP 8.4 + Nginx",
-  "author": "ChatGPT",
+  "author": "Nevercold",
   "description": "A PHP 8.4 + Nginx webserver environment (Debian, Composer, Supervisor).",
   "docker_images": {
-    "Debian PHP 8.4 + Nginx": "ghcr.io/yourname/php-nginx:latest"
+    "8.4": "ghcr.io/nevercold/php-egg:latest"
   },
   "startup": "/usr/bin/supervisord -n",
   "environment": {},
