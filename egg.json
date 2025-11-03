@@ -1,0 +1,23 @@
+{
+  "name": "PHP 8.4 + Nginx",
+  "author": "ChatGPT",
+  "description": "A PHP 8.4 + Nginx webserver environment (Debian, Composer, Supervisor).",
+  "docker_images": {
+    "Debian PHP 8.4 + Nginx": "ghcr.io/yourname/php-nginx:latest"
+  },
+  "startup": "/usr/bin/supervisord -n",
+  "environment": {},
+  "config": {
+    "files": "{}",
+    "startup": "{\r\n    \"done\": \"ready\"\r\n}",
+    "logs": "{}",
+    "stop": "pkill nginx && pkill php-fpm"
+  },
+  "scripts": {
+    "installation": {
+      "script": "#!/bin/bash\nmkdir -p /home/container/public\ncd /home/container && composer install || true",
+      "container": "debian:bookworm",
+      "entrypoint": "bash"
+    }
+  }
+}
