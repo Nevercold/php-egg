@@ -17,17 +17,19 @@ RUN apt install -y \
 # PHP-Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-
-# Setup working dir
+# Arbeitsverzeichnis im Container
 WORKDIR /home/container
 
-# Copy configs
+# Logs-Ordner (beschreibbar)
+RUN mkdir -p /home/container/logs /home/container/web
+
+# Konfigurationen kopieren
 COPY nginx.conf /etc/nginx/nginx.conf
+COPY php-fpm.conf /etc/php/8.4/fpm/php-fpm.conf
 COPY start.sh /start.sh
+
 RUN chmod +x /start.sh
 
-# Expose port
 EXPOSE 8080
 
-# Entry point
 CMD ["/bin/bash", "/start.sh"]
