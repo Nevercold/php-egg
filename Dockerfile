@@ -17,16 +17,16 @@ RUN apt install -y \
 # PHP-Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-WORKDIR /home/container
+# Erstelle beschreibbare Verzeichnisse
+RUN mkdir -p /home/container/{web,logs,run,nginx} /etc/pteroconf
 
-# Alles hier darf beschrieben werden
-RUN mkdir -p /home/container/{web,logs,run,nginx}
-
-COPY nginx.conf /home/container/nginx.conf
-COPY php-fpm.conf /home/container/php-fpm.conf
+# Kopiere statische Konfigurationen außerhalb von /home/container
+COPY nginx.conf /etc/pteroconf/nginx.conf
+COPY php-fpm.conf /etc/pteroconf/php-fpm.conf
 COPY start.sh /start.sh
 RUN chmod +x /start.sh
 
 EXPOSE 8080
+WORKDIR /home/container
 
 CMD ["/bin/bash", "/start.sh"]
